@@ -171,8 +171,79 @@ class _AnnotatelessFormBuilderState extends State<AnnotatelessFormBuilder> {
     return ReactiveAnnotatelessForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class AnnotatelessFormModelBuilder extends StatefulWidget {
+  const AnnotatelessFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final AnnotatelessForm formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(
+      BuildContext context, AnnotatelessForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, AnnotatelessForm formModel)?
+      initState;
+
+  @override
+  _AnnotatelessFormModelBuilderState createState() =>
+      _AnnotatelessFormModelBuilderState();
+}
+
+class _AnnotatelessFormModelBuilderState
+    extends State<AnnotatelessFormModelBuilder> {
+  late AnnotatelessForm _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(covariant AnnotatelessFormModelBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveAnnotatelessForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -335,13 +406,6 @@ class AnnotatelessForm implements FormModel<Annotateless> {
 
   @override
   Annotateless get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'AnnotatelessForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return Annotateless(email: _emailValue, password: _passwordValue);
   }
 

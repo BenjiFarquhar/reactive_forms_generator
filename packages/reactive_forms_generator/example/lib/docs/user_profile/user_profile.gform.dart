@@ -169,8 +169,79 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
     return ReactiveUserProfileForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class UserProfileFormModelBuilder extends StatefulWidget {
+  const UserProfileFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final UserProfileForm formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(
+      BuildContext context, UserProfileForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, UserProfileForm formModel)?
+      initState;
+
+  @override
+  _UserProfileFormModelBuilderState createState() =>
+      _UserProfileFormModelBuilderState();
+}
+
+class _UserProfileFormModelBuilderState
+    extends State<UserProfileFormModelBuilder> {
+  late UserProfileForm _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(covariant UserProfileFormModelBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveUserProfileForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -570,13 +641,6 @@ class UserProfileForm implements FormModel<UserProfile> {
 
   @override
   UserProfile get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'UserProfileForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return UserProfile(
         id: _idValue,
         firstName: _firstNameValue,
@@ -991,13 +1055,6 @@ class AddressForm implements FormModel<Address> {
 
   @override
   Address get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
   }
 

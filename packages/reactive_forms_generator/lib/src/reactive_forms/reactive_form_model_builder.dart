@@ -3,10 +3,10 @@ import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form.dart';
 
-class ReactiveFormBuilder {
+class ReactiveFormModelBuilder {
   final ReactiveForm reactiveForm;
 
-  ReactiveFormBuilder(this.reactiveForm);
+  ReactiveFormModelBuilder(this.reactiveForm);
 
   String get _baseName =>
       reactiveForm.reactiveInheritedStreamer.formGenerator.className;
@@ -14,9 +14,9 @@ class ReactiveFormBuilder {
   ClassElement get _element =>
       reactiveForm.reactiveInheritedStreamer.formGenerator.element;
 
-  String get className => '${_baseName}Builder';
+  String get className => '${_baseName}ModelBuilder';
 
-  String get stateClassName => '_${_baseName}BuilderState';
+  String get stateClassName => '_${_baseName}ModelBuilderState';
 
   Method get _createStateMethod => Method(
         (b) => b
@@ -47,11 +47,10 @@ class ReactiveFormBuilder {
               ),
               Parameter(
                 (b) => b
-                  ..name = 'model'
+                  ..name = 'formModel'
                   ..named = true
                   ..toThis = true
-                  ..required = !reactiveForm.reactiveInheritedStreamer
-                      .formGenerator.element.isNullable,
+                  ..required = true,
               ),
               Parameter(
                 (b) => b
@@ -78,27 +77,29 @@ class ReactiveFormBuilder {
                   ..toThis = true
                   ..required = true,
               ),
-              Parameter((b) => b
-                ..name = 'initState'
-                ..named = true
-                ..toThis = true),
+              Parameter(
+                (b) => b
+                  ..name = 'initState'
+                  ..named = true
+                  ..toThis = true,
+              ),
             ],
           ),
       );
 
-  Field get _model {
+  Field get _formModel {
     return Field(
       (b) => b
-        ..name = 'model'
+        ..name = 'formModel'
         ..type = Reference(
-          '${_element.fullTypeName}${_element.isNullable ? '?' : ''}',
+          reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull,
         )
         ..modifier = FieldModifier.final$,
     );
   }
 
   List<Field> get _widgetFields => [
-        _model,
+        _formModel,
         Field(
           (b) => b
             ..name = 'child'
@@ -152,16 +153,16 @@ class ReactiveFormBuilder {
             ..name = 'initState'
             ..annotations.add(const CodeExpression(Code('override')))
             ..returns = const Reference('void')
-            ..body = Code('''
-                _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull}(${reactiveForm.reactiveInheritedStreamer.formGenerator.className}.formElements${reactiveForm.reactiveInheritedStreamer.formGenerator.element.generics}(widget.model), null);
+            ..body = const Code('''
+                super.initState();
+
+                _formModel = widget.formModel;
 
                 if (_formModel.form.disabled) {
                   _formModel.form.markAsDisabled();
                 }
             
                 widget.initState?.call(context, _formModel);
-                
-                super.initState();              
               '''),
         ),
         Method(
@@ -178,21 +179,11 @@ class ReactiveFormBuilder {
               ),
             )
             ..body = const Code('''
-                if (widget.model != oldWidget.model) {
-                  _formModel.updateValue(widget.model);
-                }
-                
                 super.didUpdateWidget(oldWidget);
-              '''),
-        ),
-        Method(
-          (b) => b
-            ..name = 'dispose'
-            ..annotations.add(const CodeExpression(Code('override')))
-            ..returns = const Reference('void')
-            ..body = const Code('''
-                _formModel.form.dispose();
-                super.dispose();
+
+                if (widget.formModel != oldWidget.formModel) {
+                  _formModel = widget.formModel;
+                }
               '''),
         ),
         Method(

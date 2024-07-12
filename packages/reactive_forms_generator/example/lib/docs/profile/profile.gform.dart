@@ -165,8 +165,77 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
     return ReactiveProfileForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class ProfileFormModelBuilder extends StatefulWidget {
+  const ProfileFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final ProfileForm formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(
+      BuildContext context, ProfileForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, ProfileForm formModel)? initState;
+
+  @override
+  _ProfileFormModelBuilderState createState() =>
+      _ProfileFormModelBuilderState();
+}
+
+class _ProfileFormModelBuilderState extends State<ProfileFormModelBuilder> {
+  late ProfileForm _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(covariant ProfileFormModelBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveProfileForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -907,13 +976,6 @@ class ProfileForm implements FormModel<Profile> {
 
   @override
   Profile get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'ProfileForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return Profile(_idValue,
         anotherId: _anotherIdValue,
         name: _nameValue,
@@ -1503,13 +1565,6 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
 
   @override
   IncidenceFilter get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'IncidenceFilterForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return IncidenceFilter(
         isMobilityEnabled: _isMobilityEnabledValue,
         isFurcationEnabled: _isFurcationEnabledValue,
@@ -1791,13 +1846,6 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
 
   @override
   ThresholdSetting get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'ThresholdSettingForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return ThresholdSetting(isEnabled: _isEnabledValue, value: _valueValue);
   }
 
@@ -2046,13 +2094,6 @@ class TimerSettingForm implements FormModel<TimerSetting> {
 
   @override
   TimerSetting get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'TimerSettingForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return TimerSetting(isEnabled: _isEnabledValue, value: _valueValue);
   }
 

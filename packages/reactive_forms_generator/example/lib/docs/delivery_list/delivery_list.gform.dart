@@ -171,8 +171,79 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
     return ReactiveDeliveryListForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class DeliveryListFormModelBuilder extends StatefulWidget {
+  const DeliveryListFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final DeliveryListForm formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(
+      BuildContext context, DeliveryListForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, DeliveryListForm formModel)?
+      initState;
+
+  @override
+  _DeliveryListFormModelBuilderState createState() =>
+      _DeliveryListFormModelBuilderState();
+}
+
+class _DeliveryListFormModelBuilderState
+    extends State<DeliveryListFormModelBuilder> {
+  late DeliveryListForm _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(covariant DeliveryListFormModelBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveDeliveryListForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -589,13 +660,6 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 
   @override
   DeliveryList get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'DeliveryListForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return DeliveryList(
         deliveryList: _deliveryListValue, clientList: _clientListValue);
   }
@@ -882,13 +946,6 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
 
   @override
   DeliveryPoint get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'DeliveryPointForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return DeliveryPoint(name: _nameValue, address: _addressValue);
   }
 
@@ -1186,13 +1243,6 @@ class AddressForm implements FormModel<Address> {
 
   @override
   Address get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return Address(street: _streetValue, city: _cityValue);
   }
 
@@ -1562,13 +1612,6 @@ class ClientForm implements FormModel<Client> {
 
   @override
   Client get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'ClientForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return Client(
         clientType: _clientTypeValue, name: _nameValue, notes: _notesValue);
   }
@@ -1970,8 +2013,80 @@ class _StandaloneDeliveryPointFormBuilderState
     return ReactiveStandaloneDeliveryPointForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class StandaloneDeliveryPointFormModelBuilder extends StatefulWidget {
+  const StandaloneDeliveryPointFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final StandaloneDeliveryPointForm formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(BuildContext context,
+      StandaloneDeliveryPointForm formModel, Widget? child) builder;
+
+  final void Function(
+      BuildContext context, StandaloneDeliveryPointForm formModel)? initState;
+
+  @override
+  _StandaloneDeliveryPointFormModelBuilderState createState() =>
+      _StandaloneDeliveryPointFormModelBuilderState();
+}
+
+class _StandaloneDeliveryPointFormModelBuilderState
+    extends State<StandaloneDeliveryPointFormModelBuilder> {
+  late StandaloneDeliveryPointForm _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(
+      covariant StandaloneDeliveryPointFormModelBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveStandaloneDeliveryPointForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -2164,13 +2279,6 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
 
   @override
   DeliveryPoint get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'StandaloneDeliveryPointForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return DeliveryPoint(name: _nameValue, address: _addressValue);
   }
 
