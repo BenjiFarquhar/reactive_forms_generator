@@ -212,8 +212,6 @@ class ReactiveFormBuilder {
                 return ${reactiveForm.className}(
                   key: ObjectKey(_formModel),
                   form: _formModel,
-                  // canPop: widget.canPop,
-                  // onPopInvoked: widget.onPopInvoked,
                   child: ReactiveFormBuilder(
                     form: () => _formModel.form,
                     canPop: widget.canPop,

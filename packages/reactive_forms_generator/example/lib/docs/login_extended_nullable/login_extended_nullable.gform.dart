@@ -173,8 +173,6 @@ class _LoginExtendedNullableFormBuilderState
     return ReactiveLoginExtendedNullableForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -187,11 +185,6 @@ class _LoginExtendedNullableFormBuilderState
   }
 }
 
-/// Similar to the LoginExtendedNullableFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `LoginExtendedNullableFormBuilder.initState` and `LoginExtendedNullableFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class LoginExtendedNullableFormModelBuilder extends StatefulWidget {
   const LoginExtendedNullableFormModelBuilder({
     Key? key,
@@ -254,8 +247,6 @@ class _LoginExtendedNullableFormModelBuilderState
     return ReactiveLoginExtendedNullableForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,

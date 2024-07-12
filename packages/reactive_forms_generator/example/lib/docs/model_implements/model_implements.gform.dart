@@ -174,8 +174,6 @@ class _ModelImplementsFormBuilderState
     return ReactiveModelImplementsForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -188,11 +186,6 @@ class _ModelImplementsFormBuilderState
   }
 }
 
-/// Similar to the ModelImplementsFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `ModelImplementsFormBuilder.initState` and `ModelImplementsFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class ModelImplementsFormModelBuilder extends StatefulWidget {
   const ModelImplementsFormModelBuilder({
     Key? key,
@@ -255,8 +248,6 @@ class _ModelImplementsFormModelBuilderState
     return ReactiveModelImplementsForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,

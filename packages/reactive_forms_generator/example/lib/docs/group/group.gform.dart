@@ -165,8 +165,6 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
     return ReactiveGroupForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -179,11 +177,6 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
   }
 }
 
-/// Similar to the GroupFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `GroupFormBuilder.initState` and `GroupFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class GroupFormModelBuilder extends StatefulWidget {
   const GroupFormModelBuilder({
     Key? key,
@@ -242,8 +235,6 @@ class _GroupFormModelBuilderState extends State<GroupFormModelBuilder> {
     return ReactiveGroupForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,

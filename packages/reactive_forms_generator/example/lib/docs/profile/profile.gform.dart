@@ -165,8 +165,6 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
     return ReactiveProfileForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -179,11 +177,6 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
   }
 }
 
-/// Similar to the ProfileFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `ProfileFormBuilder.initState` and `ProfileFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class ProfileFormModelBuilder extends StatefulWidget {
   const ProfileFormModelBuilder({
     Key? key,
@@ -243,8 +236,6 @@ class _ProfileFormModelBuilderState extends State<ProfileFormModelBuilder> {
     return ReactiveProfileForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,

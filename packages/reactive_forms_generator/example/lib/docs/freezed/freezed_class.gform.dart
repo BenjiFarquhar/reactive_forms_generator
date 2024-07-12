@@ -171,8 +171,6 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
     return ReactiveFreezedClassForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -185,11 +183,6 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
   }
 }
 
-/// Similar to the FreezedClassFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `FreezedClassFormBuilder.initState` and `FreezedClassFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class FreezedClassFormModelBuilder extends StatefulWidget {
   const FreezedClassFormModelBuilder({
     Key? key,
@@ -251,8 +244,6 @@ class _FreezedClassFormModelBuilderState
     return ReactiveFreezedClassForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,

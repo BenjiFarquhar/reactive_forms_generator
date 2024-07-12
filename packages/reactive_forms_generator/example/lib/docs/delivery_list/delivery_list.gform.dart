@@ -171,8 +171,6 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
     return ReactiveDeliveryListForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -185,11 +183,6 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
   }
 }
 
-/// Similar to the DeliveryListFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `DeliveryListFormBuilder.initState` and `DeliveryListFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class DeliveryListFormModelBuilder extends StatefulWidget {
   const DeliveryListFormModelBuilder({
     Key? key,
@@ -251,8 +244,6 @@ class _DeliveryListFormModelBuilderState
     return ReactiveDeliveryListForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -2022,8 +2013,6 @@ class _StandaloneDeliveryPointFormBuilderState
     return ReactiveStandaloneDeliveryPointForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -2036,11 +2025,6 @@ class _StandaloneDeliveryPointFormBuilderState
   }
 }
 
-/// Similar to the StandaloneDeliveryPointFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `StandaloneDeliveryPointFormBuilder.initState` and `StandaloneDeliveryPointFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class StandaloneDeliveryPointFormModelBuilder extends StatefulWidget {
   const StandaloneDeliveryPointFormModelBuilder({
     Key? key,
@@ -2103,8 +2087,6 @@ class _StandaloneDeliveryPointFormModelBuilderState
     return ReactiveStandaloneDeliveryPointForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,

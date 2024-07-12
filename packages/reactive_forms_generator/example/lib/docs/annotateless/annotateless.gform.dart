@@ -171,8 +171,6 @@ class _AnnotatelessFormBuilderState extends State<AnnotatelessFormBuilder> {
     return ReactiveAnnotatelessForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -185,11 +183,6 @@ class _AnnotatelessFormBuilderState extends State<AnnotatelessFormBuilder> {
   }
 }
 
-/// Similar to the AnnotatelessFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `AnnotatelessFormBuilder.initState` and `AnnotatelessFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class AnnotatelessFormModelBuilder extends StatefulWidget {
   const AnnotatelessFormModelBuilder({
     Key? key,
@@ -251,8 +244,6 @@ class _AnnotatelessFormModelBuilderState
     return ReactiveAnnotatelessForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,

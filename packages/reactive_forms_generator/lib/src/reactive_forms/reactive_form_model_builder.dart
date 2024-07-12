@@ -139,12 +139,6 @@ class ReactiveFormModelBuilder {
 
   Class get _widget => Class(
         (b) => b
-          ..docs.add(
-              '''/// Similar to the ${_baseName}Builder but opts out of automatic form lifecycle
-            /// management.
-            /// 
-            /// See `${_baseName}Builder.initState` and `${_baseName}Builder.dispose` for examples
-            /// of initializing/disposing the formModel.''')
           ..types.addAll(_element.fullGenericTypes)
           ..name = className
           ..extend = const Reference('StatefulWidget')
@@ -209,8 +203,6 @@ class ReactiveFormModelBuilder {
                 return ${reactiveForm.className}(
                   key: ObjectKey(_formModel),
                   form: _formModel,
-                  // canPop: widget.canPop,
-                  // onPopInvoked: widget.onPopInvoked,
                   child: ReactiveFormBuilder(
                     form: () => _formModel.form,
                     canPop: widget.canPop,

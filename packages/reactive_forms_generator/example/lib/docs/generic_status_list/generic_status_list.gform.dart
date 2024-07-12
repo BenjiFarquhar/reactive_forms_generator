@@ -173,8 +173,6 @@ class _StatusListFormBuilderState<T extends Enum>
     return ReactiveStatusListForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -187,11 +185,6 @@ class _StatusListFormBuilderState<T extends Enum>
   }
 }
 
-/// Similar to the StatusListFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `StatusListFormBuilder.initState` and `StatusListFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class StatusListFormModelBuilder<T extends Enum> extends StatefulWidget {
   const StatusListFormModelBuilder({
     Key? key,
@@ -253,8 +246,6 @@ class _StatusListFormModelBuilderState<T extends Enum>
     return ReactiveStatusListForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,

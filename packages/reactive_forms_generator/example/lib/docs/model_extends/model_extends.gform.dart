@@ -171,8 +171,6 @@ class _ModelExtendsFormBuilderState extends State<ModelExtendsFormBuilder> {
     return ReactiveModelExtendsForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -185,11 +183,6 @@ class _ModelExtendsFormBuilderState extends State<ModelExtendsFormBuilder> {
   }
 }
 
-/// Similar to the ModelExtendsFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `ModelExtendsFormBuilder.initState` and `ModelExtendsFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class ModelExtendsFormModelBuilder extends StatefulWidget {
   const ModelExtendsFormModelBuilder({
     Key? key,
@@ -251,8 +244,6 @@ class _ModelExtendsFormModelBuilderState
     return ReactiveModelExtendsForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,

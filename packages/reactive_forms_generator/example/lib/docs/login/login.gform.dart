@@ -165,8 +165,6 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
     return ReactiveLoginForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -179,11 +177,6 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
   }
 }
 
-/// Similar to the LoginFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `LoginFormBuilder.initState` and `LoginFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class LoginFormModelBuilder extends StatefulWidget {
   const LoginFormModelBuilder({
     Key? key,
@@ -242,8 +235,6 @@ class _LoginFormModelBuilderState extends State<LoginFormModelBuilder> {
     return ReactiveLoginForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,

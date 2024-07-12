@@ -165,8 +165,6 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
     return ReactiveTestForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -179,11 +177,6 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
   }
 }
 
-/// Similar to the TestFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `TestFormBuilder.initState` and `TestFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class TestFormModelBuilder extends StatefulWidget {
   const TestFormModelBuilder({
     Key? key,
@@ -242,8 +235,6 @@ class _TestFormModelBuilderState extends State<TestFormModelBuilder> {
     return ReactiveTestForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,

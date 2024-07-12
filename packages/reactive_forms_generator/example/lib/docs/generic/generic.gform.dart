@@ -165,8 +165,6 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
     return ReactiveTagsForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -179,11 +177,6 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
   }
 }
 
-/// Similar to the TagsFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `TagsFormBuilder.initState` and `TagsFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class TagsFormModelBuilder<T> extends StatefulWidget {
   const TagsFormModelBuilder({
     Key? key,
@@ -243,8 +236,6 @@ class _TagsFormModelBuilderState<T> extends State<TagsFormModelBuilder<T>> {
     return ReactiveTagsForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,

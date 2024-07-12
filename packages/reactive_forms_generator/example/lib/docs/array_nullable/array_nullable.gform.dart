@@ -171,8 +171,6 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
     return ReactiveArrayNullableForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -185,11 +183,6 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
   }
 }
 
-/// Similar to the ArrayNullableFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `ArrayNullableFormBuilder.initState` and `ArrayNullableFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class ArrayNullableFormModelBuilder extends StatefulWidget {
   const ArrayNullableFormModelBuilder({
     Key? key,
@@ -251,8 +244,6 @@ class _ArrayNullableFormModelBuilderState
     return ReactiveArrayNullableForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,

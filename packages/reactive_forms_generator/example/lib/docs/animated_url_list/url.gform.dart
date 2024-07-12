@@ -165,8 +165,6 @@ class _UrlFormBuilderState extends State<UrlFormBuilder> {
     return ReactiveUrlForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -179,11 +177,6 @@ class _UrlFormBuilderState extends State<UrlFormBuilder> {
   }
 }
 
-/// Similar to the UrlFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `UrlFormBuilder.initState` and `UrlFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class UrlFormModelBuilder extends StatefulWidget {
   const UrlFormModelBuilder({
     Key? key,
@@ -242,8 +235,6 @@ class _UrlFormModelBuilderState extends State<UrlFormModelBuilder> {
     return ReactiveUrlForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,

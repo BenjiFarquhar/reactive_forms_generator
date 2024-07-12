@@ -169,8 +169,6 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
     return ReactiveMailingListForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -183,11 +181,6 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
   }
 }
 
-/// Similar to the MailingListFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `MailingListFormBuilder.initState` and `MailingListFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class MailingListFormModelBuilder extends StatefulWidget {
   const MailingListFormModelBuilder({
     Key? key,
@@ -249,8 +242,6 @@ class _MailingListFormModelBuilderState
     return ReactiveMailingListForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,

@@ -171,8 +171,6 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
     return ReactiveSomeWiredNameForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -185,11 +183,6 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
   }
 }
 
-/// Similar to the SomeWiredNameFormBuilder but opts out of automatic form lifecycle
-/// management.
-///
-/// See `SomeWiredNameFormBuilder.initState` and `SomeWiredNameFormBuilder.dispose` for examples
-/// of initializing/disposing the formModel.
 class SomeWiredNameFormModelBuilder extends StatefulWidget {
   const SomeWiredNameFormModelBuilder({
     Key? key,
@@ -251,8 +244,6 @@ class _SomeWiredNameFormModelBuilderState
     return ReactiveSomeWiredNameForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
