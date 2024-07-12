@@ -386,13 +386,6 @@ class MailingListForm implements FormModel<MailingList> {
 
   @override
   MailingList get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'MailingListForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return MailingList(emailList: _emailListValue);
   }
 

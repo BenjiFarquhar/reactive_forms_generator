@@ -415,13 +415,6 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
 
   @override
   RenamedBasic get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'SomeWiredNameForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return RenamedBasic(email: _emailValue, password: _passwordValue);
   }
 

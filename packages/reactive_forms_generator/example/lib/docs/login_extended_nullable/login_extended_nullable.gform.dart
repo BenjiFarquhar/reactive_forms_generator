@@ -947,13 +947,6 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
 
   @override
   LoginExtendedNullable get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'LoginExtendedNullableForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return LoginExtendedNullable(
         email: _emailValue,
         password: _passwordValue,

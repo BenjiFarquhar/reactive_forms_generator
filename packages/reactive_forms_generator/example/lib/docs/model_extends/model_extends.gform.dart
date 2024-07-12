@@ -415,13 +415,6 @@ class ModelExtendsForm implements FormModel<ModelExtends> {
 
   @override
   ModelExtends get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'ModelExtendsForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return ModelExtends(email: _emailValue, password: _passwordValue);
   }
 

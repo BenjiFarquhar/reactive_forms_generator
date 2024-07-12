@@ -389,13 +389,6 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
 
   @override
   StatusList<T> get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'StatusListForm<T>'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return StatusList<T>(list: _listValue);
   }
 

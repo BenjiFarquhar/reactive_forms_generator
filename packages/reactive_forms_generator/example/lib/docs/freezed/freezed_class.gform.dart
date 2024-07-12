@@ -753,13 +753,6 @@ class FreezedClassForm implements FormModel<FreezedClass> {
 
   @override
   FreezedClass get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'FreezedClassForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return FreezedClass(_genderValue,
         id: _idValue,
         name: _nameValue,

@@ -415,13 +415,6 @@ class AnnotatelessForm implements FormModel<Annotateless> {
 
   @override
   Annotateless get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'AnnotatelessForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return Annotateless(email: _emailValue, password: _passwordValue);
   }
 

@@ -366,13 +366,6 @@ class TagsForm<T> implements FormModel<Tags<T>> {
 
   @override
   Tags<T> get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'TagsForm<T>'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return Tags<T>(tags: _tagsValue);
   }
 

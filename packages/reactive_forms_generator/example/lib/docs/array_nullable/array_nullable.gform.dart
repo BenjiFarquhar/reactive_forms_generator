@@ -865,13 +865,6 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
 
   @override
   ArrayNullable get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'ArrayNullableForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return ArrayNullable(
         emailList: _emailListValue,
         fruitList: _fruitListValue,

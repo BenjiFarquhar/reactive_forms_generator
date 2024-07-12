@@ -406,13 +406,6 @@ class LoginForm implements FormModel<Login> {
 
   @override
   Login get model {
-    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
-
-    if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'LoginForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
-    }
     return Login(email: _emailValue, password: _passwordValue);
   }
 

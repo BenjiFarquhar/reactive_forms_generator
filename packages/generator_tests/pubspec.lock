@@ -448,7 +448,7 @@ packages:
       path: "../reactive_forms_generator"
       relative: true
     source: path
-    version: "5.0.3"
+    version: "5.0.4"
   recase:
     dependency: "direct main"
     description:
